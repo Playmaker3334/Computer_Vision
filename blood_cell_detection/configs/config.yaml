@@ -1,0 +1,73 @@
+project:
+  name: blood_cell_detection
+  version: "1.0"
+
+roboflow:
+  api_key: "YOUR_API_KEY"
+  workspace: "team-roboflow"
+  project: "blood-cell-detection-1ekwu"
+  version: 3
+  format: "yolov8"
+
+data:
+  raw_images: "data/raw/images"
+  raw_annotations: "data/raw/annotations"
+  processed:
+    train_images: "data/processed/train/images"
+    train_labels: "data/processed/train/labels"
+    val_images: "data/processed/val/images"
+    val_labels: "data/processed/val/labels"
+    test_images: "data/processed/test/images"
+    test_labels: "data/processed/test/labels"
+  video:
+    raw: "data/video/raw"
+    frames: "data/video/frames"
+  yaml: "configs/data.yaml"
+
+model:
+  architecture: "yolo11n"         # yolo11n | yolo11s | yolo11m | yolo11l | yolo11x
+  pretrained_weights: "yolo11n.pt"
+  weights_dir: "models/weights"
+  experiments_dir: "models/experiments"
+
+training:
+  epochs: 50
+  imgsz: 640
+  batch: 16
+  patience: 10
+  lr0: 0.01
+  lrf: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 3
+  device: "0"                     # "0" for GPU, "cpu" for CPU
+
+augmentation:
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  flipud: 0.5
+  fliplr: 0.5
+  mosaic: 1.0
+  mixup: 0.1
+
+evaluation:
+  conf_threshold: 0.5
+  iou_threshold: 0.45
+  save_plots: true
+
+inference:
+  conf: 0.5
+  iou: 0.45
+  save: true
+  output_dir: "outputs/predictions"
+
+classes:
+  - RBC
+  - WBC
+  - Platelets
+
+outputs:
+  predictions: "outputs/predictions"
+  reports: "outputs/reports"
+  visualizations: "outputs/visualizations"
