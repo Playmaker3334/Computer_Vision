@@ -1,13 +1,4 @@
-"""
-run_pipeline.py
-Master script that runs the full blood cell detection pipeline:
-  1. Download dataset
-  2. (Optional) Extract video frames
-  3. Train YOLO11 model
-  4. Evaluate on test set
-  5. Run inference
-  6. Generate visualizations
-"""
+
 
 import argparse
 import yaml
